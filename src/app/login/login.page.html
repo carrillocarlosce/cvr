@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-button size="small" (click)="loginWithGoogle()">Entrar con Google</ion-button>
+  <div *ngIf="user | async">
+    {{user | json}}
+  </div>
+</ion-content>
