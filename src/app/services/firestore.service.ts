@@ -8,6 +8,7 @@ export class FirestoreService {
   constructor(private afs: AngularFirestore) { }
 
   getDocument(path): AngularFirestoreDocument {
+    console.log(`Reading from "${path}"`);
     return this.afs.doc(path);
   }
 

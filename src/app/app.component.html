@@ -16,6 +16,24 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <div *ngIf="!(user | async)">
+            <ion-menu-toggle auto-hide="false" *ngFor="let p of loggedOutPages">
+              <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+                <ion-icon slot="start" [name]="p.icon"></ion-icon>
+                <ion-label>
+                  {{p.title}}
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </div>
+          <ion-menu-toggle auto-hide="false" *ngIf="(user | async) as user">
+            <ion-item (click)="signOut()">
+              <ion-icon slot="start" name="contact"></ion-icon>
+              <ion-label>
+                Salir ({{user.displayName || 'loading...'}})
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
         </ion-list>
       </ion-content>
     </ion-menu>

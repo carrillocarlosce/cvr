@@ -34,3 +34,4 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 .git/
 node_modules/
+src/environments/
