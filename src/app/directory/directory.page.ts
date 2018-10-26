@@ -15,6 +15,8 @@ export class DirectoryPage implements OnInit {
   public children:Observable<any[]>;
   public folder: Observable<any>;
   public selectedFile: any;
+  public aside: any = {};
+  public showAside; 
   constructor(
     public afs: AngularFirestore,
     public auth: AuthService,
@@ -46,8 +48,26 @@ export class DirectoryPage implements OnInit {
   }
 
   selectFile(file) {
-    console.log(file)
     this.selectedFile = file;
+    this.showAside = true;
+    this.aside.show = true;
+    this.aside.component = 'file_details';
+    this.aside.data = {
+      title: file,
+      custom_data: 'Custom String'
+    };
+
+    console.log(this.aside)
+  }
+
+  newFolder() {
+    this.showAside = true;
+    this.aside.show = true;
+    this.aside.component = 'folder_form';
+    this.aside.data = {
+      title: 'Nueva Carpeta',
+      custom_data: 'Custom String'
+    };
   }
 
 }

@@ -9,35 +9,45 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <div *ngIf="data | async; then loaded else loading">
     <!-- template will replace this div -->
   </div>
   <ng-template #loaded>
-    <ion-grid>
-        <ion-row>
-          <ion-col *ngFor="let item of (children | async)" size="auto">
-            <ion-card [routerLink]="['/directory', item.id]" routerDirection="forward">
-              <ion-icon name="folder" size="large"></ion-icon>
-              <strong>{{item.name}}</strong>
-            </ion-card>
-          </ion-col>
-          <ion-col *ngFor="let item of (folder | async)?.files" size="auto">
-            <ion-card (click)="selectFile(item)">
-              <ion-icon name="document" size="large"></ion-icon>
-              <strong>{{item}}</strong>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <div *ngIf="selectedFile; then details">
-        
-      </div>
-      <ng-template #details>
-          <h1>Details</h1>
-      </ng-template>
+    <div class="grid-container">
+        <div class="main-view" padding [ngClass]="{
+          span_2: !showAside
+        }">
+            <div class="toolbar">
+                <ion-button size="small" (click)="newFolder()">Nueva Carpeta</ion-button>
+            </div>
+            <ion-grid>
+              <ion-row>
+                <ion-col *ngFor="let item of (children | async)" size="auto">
+                  <ion-card [routerLink]="['/directory', item.id]" routerDirection="forward">
+                    <ion-icon name="folder" size="large"></ion-icon>
+                    <strong>{{item.name}}</strong>
+                  </ion-card>
+                </ion-col>
+                <ion-col *ngFor="let item of (folder | async)?.files" size="auto">
+                  <ion-card (click)="selectFile(item)">
+                    <ion-icon name="document" size="large"></ion-icon>
+                    <strong>{{item}}</strong>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+          <div *ngIf="showAside; then asideShowed">
+          </div>
+          <ng-template #asideShowed>
+            <aside class="aside-view" padding>
+              <h1>{{aside.data.title}}</h1>
+              {{aside | json}}
+            </aside>
+          </ng-template>
+    </div>
   </ng-template>
-
   <ng-template #loading>
     <h1>Loading...</h1>
   </ng-template>

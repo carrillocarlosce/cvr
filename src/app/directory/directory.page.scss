@@ -10,3 +10,17 @@ ion-card {
         padding: 0 10px
     }
 }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 70% 30%;
+
+    .main-view {
+        &.span_2 {
+            grid-column: span 2 / auto;
+        }
+    }
+    .aside-view {
+        background-color: #eee;
+    }
+}
