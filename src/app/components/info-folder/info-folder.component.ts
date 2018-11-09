@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class InfoFolderComponent implements OnInit {
   @Input() folder: any;
-  private folderDetails: Observable<any>;
+  public folderDetails: Observable<any>;
   constructor(
     public afs: AngularFirestore
   ) { }
