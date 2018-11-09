@@ -1,0 +1,14 @@
+<div *ngIf="(folderDetails | async) as folderDetails" class="aside">
+  <div class="aside__header">
+      <h3>Información de la carpeta</h3>
+  </div>
+  <div padding>
+      <h4>{{folderDetails.name}}</h4>
+  </div>
+  <ion-item>
+    Fecha de creación: <strong>01/01/2018</strong>
+  </ion-item>
+  <ion-item>
+    Archivos: <strong>{{folderDetails.files?.length || 0}} Archivo{{folderDetails.files?.length !== 1 ? 's' : ''}}</strong>
+  </ion-item>
+</div>

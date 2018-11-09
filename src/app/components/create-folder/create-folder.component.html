@@ -1,0 +1,13 @@
+<div class="aside">
+  <div class="aside__header">
+      <h3>Crear Carpeta</h3>
+  </div>
+  <form #folderForm="ngForm" (ngSubmit)="handleForm(folderForm)">
+    <ion-item>
+      <ion-input required type="text" name="name" ngModel placeholder="Nombre de la carpeta"></ion-input>
+    </ion-item>
+    <div padding text-center>
+      <ion-button type="submit" shape="round" color="primary">Crear Carpeta</ion-button>
+    </div>
+  </form>
+</div>

@@ -6,6 +6,14 @@
     <ion-title>
       Directorio
     </ion-title>
+    <ion-buttons slot="end" *ngIf="(data | async) as folderData">
+      <ion-button size="large" (click)="newFolder(folderData)">
+        <ion-icon name="folder"></ion-icon>
+      </ion-button>
+      <ion-button size="large" (click)="folderInfo(folderData)">
+        <ion-icon name="information-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -16,11 +24,8 @@
   <ng-template #loaded>
     <div class="grid-container">
         <div class="main-view" padding [ngClass]="{
-          span_2: !showAside
+          span_2: !aside.component
         }">
-            <div class="toolbar">
-                <ion-button size="small" (click)="newFolder()">Nueva Carpeta</ion-button>
-            </div>
             <ion-grid>
               <ion-row>
                 <ion-col *ngFor="let item of (children | async)" size="auto">
@@ -38,14 +43,15 @@
               </ion-row>
             </ion-grid>
           </div>
-          <div *ngIf="showAside; then asideShowed">
+          <div *ngIf="aside.show">
+            <aside class="aside-view" [ngSwitch]="aside.component">
+                <app-create-folder *ngSwitchCase="'folder_form'" [data]="aside"></app-create-folder>
+                <app-info-folder *ngSwitchCase="'folder_info'" [folder]="aside.folder"></app-info-folder>
+                <p *ngSwitchCase="'file_details'">
+                  file_details
+                </p>
+              </aside>
           </div>
-          <ng-template #asideShowed>
-            <aside class="aside-view" padding>
-              <h1>{{aside.data.title}}</h1>
-              {{aside | json}}
-            </aside>
-          </ng-template>
     </div>
   </ng-template>
   <ng-template #loading>

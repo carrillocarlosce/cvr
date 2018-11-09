@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { CoreModule } from './core/core.module';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,8 @@ import { CoreModule } from './core/core.module';
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    CoreModule
+    CoreModule,
+    ComponentsModule
   ],
   providers: [
     StatusBar,
